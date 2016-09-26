@@ -100,8 +100,9 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
     $scope.addTodo = function(title) {
       
 
-      $http.post('http://rest.learncode.academy/api/johnbob/r2-1', {
-        subject: $scope.todoText
+      $http.post('http://rest.learncode.academy/api/johnbob/r2-1',  {
+        subject: $scope.todoText,
+        isCompleted: todoText.done
       }).success(function(todo) {
         
         
