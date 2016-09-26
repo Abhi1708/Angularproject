@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles1.css">
-    <!-- script src="script.js"></script> -->
+    
   
 </head>
-<body>
+<body >
 
     
   <!--   -->
@@ -26,7 +26,7 @@
             <input type="text" ng-model="todoText"  size="30"
              />
              <button ng-click="addTodo(todo)">Add</button>
-            <!-- <input class="btn-primary" type="submit" value="add">  -->
+            >
         </header>
 
         <section id="main" class="scroll" style="display: block;">
@@ -41,7 +41,8 @@
             <ul  class="unstyled">
               <li class="list-group-item" ng-repeat="todo in todos | filter:globalSearch" >
                 <button type="button" ng-click="delete(todo.id)">delete</button>
-                
+
+
                 <label class="switch">
                   <input type="checkbox" ng-model="todo.done" />
                   <span class="slider round"></span>
@@ -49,11 +50,15 @@
                   <span class="done-{{todo.done}}" ng-hide="todo.editing" ng-change="changeCompleted(todo)">
                   {{todo.subject}}                 
                   </span>
-
-                  <input class="tableinputbox" type="text" ng-model="todo.subject" ng-keyup="editOnEnter(todo)"/>
-                  <!-- <button type="submit" ng-hide="todo.editing" ng-click="change(todo); todo.editing =true">Edit</button>
+                  <input type="text" ng-show="todo.editing" ng-model="todo.subject">
+                  <button type="submit" ng-hide="todo.editing" ng-click="change(todo); todo.editing =true">Edit</button>
                    <button type="submit" ng-show="todo.editing" ng-click="save($index); todo.editing === false">Save</button>
-                   <button type="submit" ng-show="todo.editing" ng-click="cancel($index); todo.editing === false">Cancel</button> -->
+                   <button type="submit" ng-show="todo.editing" ng-click="cancel($index); todo.editing === false">Cancel</button>
+
+
+
+
+                  
               </li>
             </ul>
         
@@ -65,7 +70,7 @@
               
                  <!-- <button ng-click="delete(todo.id)" > Clear <span >{{(todos.length - remaining())}} {{itemText()}}</span> </button> -->
               
-              <!-- <a href="" ng-click="delete()">Delete</a> -->
+             
 
         </footer>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
@@ -103,20 +108,13 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
         $scope.todos.push({subject:$scope.todoText, done:false});
         $scope.todoText = '';
       }).error(function(err) {
-        // Alert if there's an error
+        
         return alert(err.message || "an error occurred");
       });
     }
   
 
-  // $scope.changeDone = function(todo) {
-  //   // Update the todo
-  //   $http.put('http://rest.learncode.academy/api/johnbob/r2-1' + todo.id, {
-  //     done: todo.done
-  //   }).error(function(err) {
-  //     return alert(err.message || (err.errors && err.errors.completed) || "an error occurred");
-  //   });
-  // };
+
 
 
 
@@ -135,32 +133,6 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
         });
     };
 
-  // $scope.delete = function() {
-  //   $http.get('http://rest.learncode.academy/api/johnbob/r2-1/', {
-  //     params: {
-  //       completed: true
-  //     }
-  //   }).success(function(todos) {
-  //     todos.forEach(function(t) { deleteTodo(todo); });
-  //   });
-  // };
-
-  // function deleteTodo(t) {
-  //   $http.delete('http://rest.learncode.academy/api/johnbob/r2-1/' + todo.id)
-  //   .success(function() {
-  //     // Find the index of an object with a matching id
-  //     var index = $scope.todos.indexOf(
-  //         $scope.todos.filter(function(t) {
-  //           return t.id === todo.id;
-  //         })[0]);
-
-  //     if (index !== -1) {
-  //       $scope.todos.splice(index, 1);
-  //     }
-  //   }).error(function(err) {
-  //     alert(err.message || "an error occurred");
-  //   });
-  // }
 
 
 
@@ -170,36 +142,6 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
   }
 
 
-  // $scope.change = function(field){
-      
-  //       var todoIndex = $scope.todos.indexOf(field);
-    
-  //       $scope.newField[todoIndex] = angular.copy(field);
-  //       $scope.todos[todoIndex].editing = true;
-  //   }
-
-
-  // $scope.save = function(index) {
-  //     $scope.todos[index].editing = false;
-  //   };
-
-  //   $scope.cancel = function(index) {
-  //       $scope.todos[index] = $scope.newField[index];      
-  //   };
-
-
-  
-
-  
-   
-
-      // Find the index of an object with a matching id
-  // var oldTodos = $scope.todos;
-  //   $scope.todos = [];
-  //   angular.forEach(oldTodos, function(todo) {
-  //     if (!todo.done) $scope.todos.push(todo);
-  //   });
-
      
    
 
@@ -207,24 +149,7 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
 
 
 
-  // $scope.addTodo = function() {
-
-  //     if(event.keyCode == 13 && $scope.todoText){
-  //         $scope.todos.push({subject:$scope.todoText, done:false});
-  //         $scope.todoText = '';
-  //     }
-  // };
-  // $scope.isTodo = function(){
-  //     return $scope.todos.length > 0;  
-  // };
-  // $scope.toggleEditMode = function(){
-  //     $(event.target).closest('li').toggleClass('editing');
-  // };
-  // $scope.editOnEnter = function(){
-  //     if(event.keyCode == todo.subject){
-  //         $scope.toggleEditMode();
-  //     }
-  // };
+ 
     
   $scope.remaining = function() {
     var count = 0;
@@ -234,13 +159,7 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
     return count;
   };
 
-  // $scope.hasDone = function() {
-  //     return ($scope.todos.length != $scope.remaining());
-  // }    
-    
-  // $scope.itemText = function() {
-  //     return ($scope.todos.length - $scope.remaining() > 1) ? "items" : "item";     
-  // };
+  
       
   $scope.toggleMarkAll = function() {
       angular.forEach($scope.todos, function(todo) {
@@ -248,30 +167,34 @@ angular.module('myApp').controller('TodoCtrl',['$scope','$http', function($scope
       });
     };
 
+  $scope.change = function(field){
+      
+        var todoIndex = $scope.todos.indexOf(field);
+   
+        $scope.newField[todoIndex] = angular.copy(field);
+        $scope.todos[todoIndex].editing = true;
+
+
+    }
+
+    $scope.save = function(index) {
+
+      $scope.todos[index].editing = false;
+      
+       $http.put('http://rest.learncode.academy/api/johnbob/r2-1/'+ todoindex1)
+       .success().error(function(err) {
+    
+       return alert(err.message || "an error occurred");
+    });
+    };
+
+    $scope.cancel = function(index) {
+        $scope.todos[index] = $scope.newField[index];      
+    };
+
+
 
   }]);
-
-
-  
-  
-
-  
-  // $scope.title = {{todo.subject}};
-  // $scope.editorEnabled = false;
-  
-  // $scope.enableEditor = function() {
-  //   $scope.editorEnabled = true;
-  //   $scope.editableTitle = $scope.title;
-  // };
-  
-  // $scope.disableEditor = function() {
-  //   $scope.editorEnabled = false;
-  // };
-  
-  // $scope.save = function() {
-  //   $scope.title = $scope.editableTitle;
-  //   $scope.disableEditor();
-  // };
 
  
     
